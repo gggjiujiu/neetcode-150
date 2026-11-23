@@ -1,0 +1,19 @@
+import java.util.HashMap;
+
+public class TwoSum {
+  public int[] twoSum(int[] nums, int target) {
+    HashMap<Integer, Integer> hashMap = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+      hashMap.put(nums[i], i);
+    }
+
+    for (int i = 0; i < nums.length; i++) {
+      int compliment = target - nums[i];
+      if (hashMap.containsKey(compliment) && hashMap.get(compliment) != i) {
+        return new int[]{i, hashMap.get(compliment)};
+      }
+    }
+
+    return new int[]{};
+  }
+}
