@@ -3,16 +3,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ValidAnagram {
-
-  public void countChar(Map<Character, Integer> m, char c) {
-    if (m.containsKey(c)) {
-      int count = m.get(c);
-      m.put(c, count + 1);
-    } else {
-      m.put(c, 1);
-    }
-  }
-
   // Approach 2: Sorting
   public boolean isAnagramUsingSorting(String s, String t) {
     if (s.length() != t.length()) return false;
@@ -25,6 +15,33 @@ public class ValidAnagram {
     return Arrays.equals(sAry, tAry);
   }
 
+  // Approach 3: Hash Table (Using Array)
+  public boolean isAnagramUsingHashTable(String s, String t) {
+    if (s.length() != t.length())
+      return false;
+
+    int[] count = new int[26];
+    for (int i = 0; i < s.length(); i++) {
+      count[s.charAt(i) - 'a']++;
+      count[t.charAt(i) - 'a']--;
+    }
+
+    for (int i = 0; i < count.length; i++) {
+      if (count[i] != 0)
+        return false;
+    }
+
+    return true;
+  }
+
+  public void countChar(Map<Character, Integer> m, char c) {
+    if (m.containsKey(c)) {
+      int count = m.get(c);
+      m.put(c, count + 1);
+    } else {
+      m.put(c, 1);
+    }
+  }
 
   // Approach 1: HashMap
   public boolean isAnagram(String s, String t) {
